@@ -146,7 +146,7 @@ class DatabricksSqlHook(BaseDatabricksHook, DbApiHook):
         handler: Callable | None = None,
         split_statements: bool = True,
         return_last: bool = True,
-    ) -> tuple[str, Any] | list[tuple[str, Any]] | None:
+    ) -> list[tuple[str, Any]]:
         """
         Runs a command or a list of commands. Pass a list of sql
         statements to the sql parameter to get them to execute
@@ -193,7 +193,7 @@ class DatabricksSqlHook(BaseDatabricksHook, DbApiHook):
         if handler is None:
             return None
         elif scalar_return_last:
-            return results[-1]
+            return [results[-1]]
         else:
             return results
 
